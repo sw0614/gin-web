@@ -66,6 +66,22 @@ func Register(ctx *gin.Context) {
 func Login(ctx *gin.Context) {
 	telephone := ctx.PostForm("telephone")
 	password := ctx.PostForm("password")
+
+	if len(telephone) != 11 {
+		ctx.JSON(http.StatusUnprocessableEntity, map[string]interface{}{
+			"code": 422,
+			"msg":  "手机号必须为11位",
+		})
+		return
+	}
+
+	if len(password) < 6 {
+		ctx.JSON(http.StatusUnprocessableEntity, map[string]interface{}{
+			"code": 422,
+			"msg":  "密码必须大于6位",
+		})
+		return
+	}
 }
 
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
