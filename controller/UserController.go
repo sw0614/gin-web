@@ -63,7 +63,7 @@ func Register(ctx *gin.Context) {
 	})
 
 }
-func Login(ctx *gin.Engine) {
+func Login(ctx *gin.Context) {
 	telephone := ctx.PostForm("telephone")
 	password := ctx.PostForm("password")
 }
